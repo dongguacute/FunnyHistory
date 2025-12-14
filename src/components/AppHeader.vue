@@ -187,7 +187,11 @@ const goHome = () => {
       </div>
 
       <!-- Original Text -->
-      <span ref="courseTextRef" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-700 dark:text-gray-200 font-medium whitespace-nowrap text-lg">
+      <span 
+        ref="courseTextRef" 
+        @click="router.push('/courses')"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-700 dark:text-gray-200 font-medium whitespace-nowrap text-lg cursor-pointer hover:text-gray-900 dark:hover:text-white transition-colors"
+      >
         课程
       </span>
 
