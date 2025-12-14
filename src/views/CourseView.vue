@@ -38,19 +38,60 @@
       </div>
     </div>
 
+    <!-- 课程列表 -->
+    <div class="w-full max-w-6xl px-4 mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        v-for="(course, index) in courses"
+        :key="index"
+        ref="cardsRef"
+        class="opacity-0 transform translate-y-10"
+      >
+        <CourseCard
+          :title="course.name"
+          :description="course.description"
+          :tags="course.tag"
+        />
+      </div>
+    </div>
+
     <!-- 下方留白 -->
-    <div class="flex-grow"></div>
+    <div class="flex-grow pb-20"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import gsap from 'gsap';
+import CourseCard from '@/components/CourseCard.vue';
+
+interface Course {
+  name: string;
+  description: string;
+  tag: string[];
+}
 
 const isFocused = ref(false);
 const titleRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const searchBoxRef = ref<HTMLElement | null>(null);
+const cardsRef = ref<HTMLElement[]>([]);
+
+// 自动读取 content 文件夹下的所有 json 文件
+const courses = ref<Course[]>([]);
+const modules = import.meta.glob('../content/*.json', { eager: true });
+
+for (const path in modules) {
+  const mod = modules[path] as { default: Course } | Course;
+  // 处理默认导出或直接作为 JSON 对象
+  const data = 'default' in mod ? mod.default : mod;
+  if (data && data.name && data.description) {
+    courses.value.push({
+      name: data.name,
+      description: data.description,
+      tag: data.tag || []
+    });
+  }
+}
 
 const handleFocus = () => {
   isFocused.value = true;
@@ -96,6 +137,16 @@ onMounted(() => {
       duration: 0.8,
       ease: 'power3.out'
     }, '-=0.6'); // 稍微重叠
+  }
+
+  if (cardsRef.value.length > 0) {
+    tl.to(cardsRef.value, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=0.4');
   }
 });
 </script>
