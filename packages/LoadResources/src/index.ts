@@ -16,7 +16,8 @@ export const loadResources = (filename: string, number: string) => {
     text,
     effect,
     photo,
-    audio,
+    ...(photo ? { photo } : {}),
+    ...(audio ? { audio } : {})
   }
 
 };
