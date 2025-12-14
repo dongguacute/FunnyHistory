@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center pt-[20vh] bg-white">
+  <div class="min-h-screen flex flex-col items-center pt-[20vh] bg-white dark:bg-gray-900 transition-colors duration-300">
     <!-- 艺术字标题 -->
-    <h1 ref="titleRef" class="course-title text-8xl mb-12 text-gray-800 opacity-0 transform translate-y-10 select-none">
+    <h1 ref="titleRef" class="course-title text-8xl mb-12 text-gray-800 dark:text-gray-100 opacity-0 transform translate-y-10 select-none transition-colors duration-300">
       课程
     </h1>
 
@@ -9,11 +9,11 @@
     <div ref="containerRef" class="search-container w-full max-w-2xl px-4 opacity-0 transform translate-y-10">
       <div
         ref="searchBoxRef"
-        class="search-box relative flex items-center w-full px-6 py-3 rounded-full border border-gray-200 hover:shadow-md transition-shadow duration-300 bg-white"
+        class="search-box relative flex items-center w-full px-6 py-3 rounded-full border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-300 bg-white dark:bg-gray-800"
         :class="{ 'shadow-lg border-transparent': isFocused }"
       >
         <!-- 搜索图标 -->
-        <span class="text-gray-400 mr-4">
+        <span class="text-gray-400 dark:text-gray-500 mr-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -22,14 +22,14 @@
         <!-- 输入框 -->
         <input
           type="text"
-          class="flex-1 outline-none text-lg text-gray-700 placeholder-gray-400 bg-transparent"
+          class="flex-1 outline-none text-lg text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 bg-transparent"
           placeholder="搜索课程..."
           @focus="handleFocus"
           @blur="handleBlur"
         />
 
         <!-- 麦克风图标 (装饰用) -->
-        <span class="text-blue-500 ml-4 cursor-pointer hover:opacity-80">
+        <span class="text-blue-500 dark:text-blue-400 ml-4 cursor-pointer hover:opacity-80">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
             <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
@@ -163,6 +163,5 @@ onMounted(() => {
 .course-title {
   font-family: 'Ma Shan Zheng', cursive;
   font-weight: 400;
-  color: #1f2937; /* text-gray-800 */
 }
 </style>
